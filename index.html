@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل في E-KECH CUP</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FF0000, #FFFFFF); /* متدرج أحمر إلى أبيض */
+            color: #FF0000; /* نصوص حمراء */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9); /* خلفية بيضاء شفافة */
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.5); /* ظل أحمر */
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+        .logo {
+            width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #FF0000; /* أحمر */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #FF0000; /* أحمر */
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #FF0000; /* حدود حمراء */
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.8); /* خلفية بيضاء */
+            color: #FF0000; /* نصوص حمراء */
+            font-size: 1em;
+            transition: background 0.3s ease;
+        }
+        input::placeholder, textarea::placeholder {
+            color: #FF6666; /* أحمر فاتح */
+        }
+        input:focus, textarea:focus {
+            background: rgba(255, 255, 255, 1); /* بيضاء كاملة عند التركيز */
+            outline: none;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        button {
+            background: linear-gradient(45deg, #FF0000, #FF6666); /* متدرج أحمر */
+            color: white; /* نص أبيض */
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-top: 20px;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4); /* ظل أحمر */
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 1em;
+            display: none;
+        }
+        .success { color: #FF0000; } /* أحمر */
+        .error { color: #FF6666; } /* أحمر فاتح */
+        footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #FF0000; /* أحمر */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .team-logo {
+            width: 50px;
+            height: auto;
+            margin-left: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- شعار البطولة في الأعلى -->
+        <img src="https://d.top4top.io/p_3696lcgs62.jpeg" alt="شعار البطولة" class="logo">
+        <h1>E-KECH CUP</h1>
+        <p>بطولة رمضانية تحت إشراف KACM ESPORTS</p>  <!-- تم حذف "للعبة Free Fire 4vs4" -->
+        <form id="registrationForm">
+            <input type="text" id="playerName" placeholder="اسمك في اللعبة" required>
+            <input type="text" id="realName" placeholder="اسمك الحقيقي" required>
+            <input type="number" id="age" placeholder="عمرك" required>
+            <input type="text" id="contact" placeholder="وسيلة تواصل (رقم هاتف أو بريد)" required>
+            <input type="text" id="teamName" placeholder="اسم الفريق" required>
+            <textarea id="teamMembers" placeholder="أسماء أعضاء الفريق في اللعبة (مثل: عضو1, عضو2, عضو3)" required></textarea>
+            <button type="submit">تسجيل الآن</button>
+        </form>
+        <div id="message" class="message"></div>
+        <!-- شعار الفريق في التذييل -->
+        <footer>
+            جميع البيانات محمية وتُستخدم لأغراض البطولة فقط.
+            <img src="https://c.top4top.io/p_3696dwrfx1.jpeg" alt="شعار الفريق" class="team-logo">
+        </footer>
+    </div>
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const playerName = document.getElementById('playerName').value;
+            const realName = document.getElementById('realName').value;
+            const age = document.getElementById('age').value;
+            const contact = document.getElementById('contact').value;
+            const teamName = document.getElementById('teamName').value;
+            const teamMembers = document.getElementById('teamMembers').value;
+            
+            // إنشاء رابط WhatsApp مع البيانات
+            const message = encodeURIComponent(`تسجيل جديد في E-KECH CUP:\n- الاسم الحقيقي: ${realName}\n- اسم اللاعب: ${playerName}\n- العمر: ${age}\n- التواصل: ${contact}\n- اسم الفريق: ${teamName}\n- أعضاء الفريق: ${teamMembers}`);
+            const whatsappLink = `https://wa.me/212632376024?text=${message}`;  // رقمك مع +212
+            
+            // فتح WhatsApp
+            window.open(whatsappLink, '_blank');
+            showMessage('تم فتح WhatsApp! أرسل الرسالة لإكمال التسجيل.', 'success');
+        });
+
+        function showMessage(text, type) {
+            const msg = document.getElementById('message');
+            msg.textContent = text;
+            msg.className = `message ${type}`;
+            msg.style.display = 'block';
+            setTimeout(() => msg.style.display = 'none', 5000);
+        }
+    </script>
+</body>
+</html>
