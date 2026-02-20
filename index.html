@@ -1,160 +1,225 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تسجيل في E-KECH CUP</title>
+    <title>E-KECH CUP 2026 - Cancelled</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: url('https://f.top4top.io/p_3696434jd0.png') no-repeat center center fixed; /* صورة الخلفية الجديدة */
-            background-size: cover; /* تغطية الشاشة بالكامل */
-            color: #FF0000; /* نصوص حمراء */
+            background: linear-gradient(135deg, #FF6666, #FFFFFF);
+            color: #FF0000;
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             min-height: 100vh;
+            padding-bottom: 80px; /* مسافة للتذييل */
         }
         .container {
-            background: rgba(255, 255, 255, 0.9); /* خلفية بيضاء شفافة للقراءة */
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.5); /* ظل أحمر */
-            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.5);
+            max-width: 800px;
             width: 90%;
             text-align: center;
+            margin: 20px;
         }
         .logo {
             width: 150px;
             height: auto;
             margin-bottom: 20px;
             border-radius: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
         }
         h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
-            color: #FF0000; /* أحمر */
+            color: #FF0000;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
-        p {
-            font-size: 1.2em;
-            margin-bottom: 20px;
-            color: #FF0000; /* أحمر */
+        .no-signal {
+            font-size: 3em;
+            font-weight: bold;
+            color: #FF0000;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            margin: 20px 0;
         }
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            border: 2px solid #FF0000; /* حدود حمراء */
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.8); /* خلفية بيضاء */
-            color: #FF0000; /* نصوص حمراء */
-            font-size: 1em;
-            transition: background 0.3s ease;
-        }
-        input::placeholder, textarea::placeholder {
-            color: #FF6666; /* أحمر فاتح */
-        }
-        input:focus, textarea:focus {
-            background: rgba(255, 255, 255, 1); /* بيضاء كاملة عند التركيز */
-            outline: none;
-        }
-        textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-        button {
-            background: linear-gradient(45deg, #FF0000, #FF6666); /* متدرج أحمر */
-            color: white; /* نص أبيض */
-            padding: 15px;
+        .aide-btn {
+            background: #333;
+            color: white;
+            padding: 15px 30px;
             border: none;
             border-radius: 8px;
             font-size: 1.2em;
             cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            margin-top: 20px;
+            margin-top: 30px;
+            transition: background 0.3s;
         }
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4); /* ظل أحمر */
+        .aide-btn:hover {
+            background: #555;
         }
-        .message {
-            margin-top: 20px;
-            font-size: 1em;
-            display: none;
-        }
-        .success { color: #FF0000; } /* أحمر */
-        .error { color: #FF6666; } /* أحمر فاتح */
+
+        /* Footer في أسفل الصفحة */
         footer {
-            margin-top: 20px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            color: #ccc;
+            text-align: center;
+            padding: 15px 0;
             font-size: 0.9em;
-            color: #FF0000; /* أحمر */
-            display: flex;
+            z-index: 100;
+        }
+
+        /* Discord Message Style */
+        .discord-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
             align-items: center;
             justify-content: center;
+            z-index: 1000;
         }
-        .team-logo {
-            width: 50px;
-            height: auto;
-            margin-left: 10px;
-            border-radius: 5px;
+        .discord-message {
+            background: #36393f;
+            border-radius: 8px;
+            padding: 15px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            color: #dcddde;
+        }
+        .discord-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .discord-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+        .discord-user {
+            display: flex;
+            flex-direction: column;
+        }
+        .discord-username {
+            font-weight: bold;
+            color: #FF0000;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .discord-role {
+            font-size: 0.7em;
+            background: #FF0000;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin-left: 5px;
+        }
+        .discord-timestamp {
+            font-size: 0.75em;
+            color: #72767d;
+        }
+        .discord-content {
+            margin-left: 55px;
+            font-size: 1em;
+            line-height: 1.4;
+        }
+        .discord-content .everyone {
+            color: #7289DA;
+            font-weight: bold;
+            background: rgba(114, 137, 218, 0.2);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        .discord-close {
+            background: transparent;
+            border: none;
+            color: #b9bbbe;
+            font-size: 1.5em;
+            cursor: pointer;
+            float: right;
+        }
+        .discord-close:hover {
+            color: #ffffff;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- شعار البطولة في الأعلى -->
-        <img src="https://d.top4top.io/p_3696lcgs62.jpeg" alt="شعار البطولة" class="logo">
-        <h1>E-KECH CUP</h1>
-        <p>بطولة رمضانية تحت إشراف KACM ESPORTS</p>
-        <form id="registrationForm">
-            <input type="text" id="playerName" placeholder="اسمك في اللعبة" required>
-            <input type="text" id="realName" placeholder="اسمك الحقيقي" required>
-            <input type="number" id="age" placeholder="عمرك" required>
-            <input type="text" id="contact" placeholder="وسيلة تواصل (رقم هاتف أو بريد)" required>
-            <input type="text" id="teamName" placeholder="اسم الفريق" required>
-            <textarea id="teamMembers" placeholder="أسماء أعضاء الفريق في اللعبة (مثل: عضو1, عضو2, عضو3)" required></textarea>
-            <button type="submit">تسجيل الآن</button>
-        </form>
-        <div id="message" class="message"></div>
-        <!-- شعار الفريق في التذييل -->
-        <footer>
-            جميع البيانات محمية وتُستخدم لأغراض البطولة فقط.
-            <img src="https://c.top4top.io/p_3696dwrfx1.jpeg" alt="شعار الفريق" class="team-logo">
-        </footer>
+        <img src="https://d.top4top.io/p_3696lcgs62.jpeg" alt="Tournament Logo" class="logo">
+        <div class="no-signal">No signal</div>
+        <p>The tournament has been cancelled.</p>
     </div>
-    <script>
-        document.getElementById('registrationForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const playerName = document.getElementById('playerName').value;
-            const realName = document.getElementById('realName').value;
-            const age = document.getElementById('age').value;
-            const contact = document.getElementById('contact').value;
-            const teamName = document.getElementById('teamName').value;
-            const teamMembers = document.getElementById('teamMembers').value;
-            
-            // إنشاء رابط WhatsApp مع البيانات
-            const message = encodeURIComponent(`تسجيل جديد في E-KECH CUP:\n- الاسم الحقيقي: ${realName}\n- اسم اللاعب: ${playerName}\n- العمر: ${age}\n- التواصل: ${contact}\n- اسم الفريق: ${teamName}\n- أعضاء الفريق: ${teamMembers}`);
-            const whatsappLink = `https://wa.me/212632376024?text=${message}`;  // رقمك مع +212
-            
-            // فتح WhatsApp
-            window.open(whatsappLink, '_blank');
-            showMessage('تم فتح WhatsApp! أرسل الرسالة لإكمال التسجيل.', 'success');
-        });
+    
+    <button class="aide-btn" onclick="showDiscordMessage()">Aide</button>
 
-        function showMessage(text, type) {
-            const msg = document.getElementById('message');
-            msg.textContent = text;
-            msg.className = `message ${type}`;
-            msg.style.display = 'block';
-            setTimeout(() => msg.style.display = 'none', 5000);
+    <!-- Footer في أسفل الصفحة -->
+    <footer>
+        © 2026 E-KECH CUP. All rights reserved.<br>
+        تابع للجنة المنظمة KACM ESPORTS.
+    </footer>
+
+    <!-- Discord Message Overlay -->
+    <div class="discord-overlay" id="discordOverlay">
+        <div class="discord-message">
+            <button class="discord-close" onclick="closeDiscordMessage()">×</button>
+            <div class="discord-header">
+                <img src="https://c.top4top.io/p_3696dwrfx1.jpeg" alt="KACM Esports Logo" class="discord-avatar">
+                <div class="discord-user">
+                    <div class="discord-username">
+                        KACM Esports
+                        <span class="discord-role">👑 Owner</span>
+                    </div>
+                    <div class="discord-timestamp" id="discordTimestamp"></div>
+                </div>
+            </div>
+            <div class="discord-content">
+                <span class="everyone">@everyone</span> Rah lboutola mab9atch hit rah bina nbdawha bkri bach tsali 9bl maysali emdan walakin rah ylah 3 squadat li msjlin y3ni makayna lboutola la wlo tal mra khra . Thank you for your understanding
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showDiscordMessage() {
+            // إضافة الوقت الحالي
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+            document.getElementById('discordTimestamp').textContent = 'Today at ' + timeString;
+            
+            // إظهار النافذة
+            document.getElementById('discordOverlay').style.display = 'flex';
         }
+
+        function closeDiscordMessage() {
+            document.getElementById('discordOverlay').style.display = 'none';
+        }
+
+        // إغلاق عند الضغط خارج النافذة
+        document.getElementById('discordOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeDiscordMessage();
+            }
+        });
     </script>
 </body>
 </html>
